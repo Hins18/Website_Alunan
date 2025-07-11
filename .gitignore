@@ -1,0 +1,13 @@
+# File Konfigurasi Database (SANGAT PENTING!)
+# File ini berisi username dan password database Anda.
+db_config.php
+
+# Folder Vendor dari Composer
+# Folder ini berisi semua library yang diinstal oleh Composer (seperti Midtrans).
+# Orang lain yang meng-clone proyek Anda cukup menjalankan "composer install".
+/vendor/
+
+# File lain yang mungkin berisi informasi sensitif atau tidak perlu diunggah
+*.log
+*.sql
+.env
