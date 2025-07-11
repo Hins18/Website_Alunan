@@ -127,3 +127,33 @@ $(document).ready(function() {
         }, 500);
     });
 });
+document.addEventListener("DOMContentLoaded", function() {
+
+    const chatbotToggleButton = document.getElementById("chatbot-toggle-btn");
+    const chatbotContainer = document.getElementById("chatbot-container");
+    const chatbotCloseButton = document.getElementById("chatbot-close-btn");
+    const sendButton = document.getElementById("send-btn");
+    const userInput = document.getElementById("user-input");
+    const chatbotMessages = document.getElementById("chatbot-messages");
+
+    // Pastikan semua elemen ada sebelum menambahkan event listener
+    if (chatbotToggleButton && chatbotContainer && chatbotCloseButton) {
+        // Toggle chatbot visibility
+        chatbotToggleButton.onclick = function() {
+            if (chatbotContainer.style.display === "none" || chatbotContainer.style.display === "") {
+                chatbotContainer.style.display = "flex";
+            } else {
+                chatbotContainer.style.display = "none";
+            }
+        };
+
+        // Close chatbot
+        chatbotCloseButton.onclick = function() {
+            chatbotContainer.style.display = "none";
+        };
+    }
+
+    // Fungsi lainnya (kirim pesan, dll.)
+    // ...
+
+});
