@@ -83,3 +83,47 @@ $(".client_owl-carousel").owlCarousel({
         }
     }
 });
+
+$(document).ready(function() {
+    // ... (kode JavaScript Anda yang sudah ada)
+
+    // Chatbot Logic
+    const chatbotToggleButton = $('#chatbotToggleButton');
+    const chatbotContainer = $('#chatbotContainer');
+    const chatbotCloseBtn = $('#chatbotCloseBtn');
+    const chatbotOptions = $('.chatbot-option');
+    const chatbotBody = $('#chatbotBody');
+
+    const responses = {
+        "jam_buka": "Kami buka setiap hari dari jam 11.00 - 23.00.",
+        "lokasi": "Lokasi kami ada di Jl. Sersan Idris No.1, RT.003/RW.004, Marga Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17141.",
+        "promo": "Saat ini belum ada promo yang tersedia. Pantau terus media sosial kami untuk update terbaru!",
+        "default": "Maaf, saya tidak mengerti. Silakan pilih salah satu opsi yang tersedia."
+    };
+
+    function toggleChatbot() {
+        chatbotContainer.slideToggle();
+    }
+
+    function addMessage(message, sender) {
+        const messageClass = sender === 'user' ? 'user-message' : 'bot-message';
+        const messageElement = `<div class="chatbot-message ${messageClass}"><p>${message}</p></div>`;
+        chatbotBody.append(messageElement);
+        chatbotBody.scrollTop(chatbotBody[0].scrollHeight); // Auto-scroll to bottom
+    }
+
+    chatbotToggleButton.on('click', toggleChatbot);
+    chatbotCloseBtn.on('click', toggleChatbot);
+
+    chatbotOptions.on('click', function() {
+        const question = $(this).data('question');
+        const userMessage = $(this).text();
+        const botResponse = responses[question] || responses['default'];
+
+        addMessage(userMessage, 'user');
+
+        setTimeout(function() {
+            addMessage(botResponse, 'bot');
+        }, 500);
+    });
+});

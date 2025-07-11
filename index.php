@@ -454,6 +454,7 @@ if ($result_get_reviews && $result_get_reviews->num_rows > 0) {
       </div>
     </div>
   </section>
+  
   <footer class="footer_section"><div class="container"><div class="row"><div class="col-md-4 footer-col"><div class="footer_contact"><h4>Kontak Kami</h4><div class="contact_link_box"><a href="https://www.google.com/maps/place/Kedai+Alunan/@-6.2394906,106.9992501,21z/data=!4m6!3m5!1s0x2e698d05a7c75cf7:0x164e561e0cfef4e!8m2!3d-6.2395455!4d106.999487!16s%2Fg%2F11lg2s_06y?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"><i class="fa fa-map-marker" aria-hidden="true"></i><span>Jl.Sersan Idris No.1 Bekasi Selatan</span></a><a href="https://wa.me/6281280535246"><i class="fa fa-whatsapp" aria-hidden="true"></i><span>081280535246</span></a></div></div></div><div class="col-md-4 footer-col"><div class="footer_detail"><a href="" class="footer-logo">Alunan</a><p>Kunjungi Social Media Kami</p><div class="footer_social"><a href="https://www.tiktok.com/@hei.alunan" target="_blank" rel="noopener noreferrer"><img src="images/tiktok.svg" alt="TikTok" width="20" height="20"/></a><a href="https://www.instagram.com/kedaialunan/"><i class="fa fa-instagram" aria-hidden="true"></i></a></div></div></div><div class="col-md-4 footer-col"><h4>Jam Buka</h4><p>Setiap Hari</p><p>11.00 - 23.00</p></div></div><div class="footer-info"><p>© <span id="displayYear"></span></p></div></div></footer>
 
   <script src="js/jquery-3.4.1.min.js"></script>
@@ -885,6 +886,29 @@ $(document).ready(function() {
     if ($("#bookLink").length) { $("#bookLink").on("click", function (e) { /* ... smooth scroll ... */ }); }
 });
 </script>
+<div class="chatbot-container" id="chatbotContainer">
+    <div class="chatbot-header" id="chatbotHeader">
+        <span>Chat dengan Kami!</span>
+        <span class="chatbot-close-btn" id="chatbotCloseBtn">&times;</span>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+        <div class="chatbot-message bot-message">
+            <p>Halo! Ada yang bisa saya bantu? Silakan pilih salah satu opsi di bawah ini:</p>
+            <div class="chatbot-options">
+                <button class="chatbot-option" data-question="jam_buka">Jam Buka</button>
+                <button class="chatbot-option" data-question="lokasi">Lokasi</button>
+                <button class="chatbot-option" data-question="promo">Promo</button>
+            </div>
+        </div>
+    </div>
+    <div class="chatbot-footer">
+        <input type="text" id="chatbotInput" placeholder="Ketik pesan..." disabled>
+        <button id="chatbotSendBtn" disabled>Kirim</button>
+    </div>
+</div>
 
+<div class="chatbot-toggle-button" id="chatbotToggleButton">
+    <i class="fa fa-comments"></i>
+</div>
 </body>
 </html>
