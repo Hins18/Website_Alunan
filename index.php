@@ -464,7 +464,8 @@ if ($result_get_reviews && $result_get_reviews->num_rows > 0) {
   <script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
   <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-  
+  <script src="js/custom.js"></script>
+
   <div id="loginModal" class="modal"><div class="modal-content"><span class="close-btn login-close-btn">×</span><div class="modal-header-text"><h2>Login Akun</h2></div><div id="loginMessage" class="message"></div><form id="loginForm" method="POST" action="login.php"><div class="form-group"><label for="username">Username:</label><input type="text" id="username" name="username" class="form-control-modal" required></div><div class="form-group"><label for="password">Password:</label><input type="password" id="password" name="password" class="form-control-modal" required></div><div class="form-group"><input type="submit" value="Login" class="btn-login"></div></form><div class="modal-footer-text"><p>Belum punya akun? <a href="#" id="switchToRegisterLink">Daftar di sini</a></p></div></div></div>
   <div id="registerModal" class="modal"><div class="modal-content"><span class="close-btn register-close-btn">×</span><div class="modal-header-text"><h2>Daftar Akun Baru</h2></div><div id="registerMessage" class="message"></div><form id="registerForm"><div class="form-group"><label for="reg_username">Username:</label><input type="text" id="reg_username" name="username" class="form-control-modal" placeholder="Minimal 4 karakter" required></div><div class="form-group"><label for="reg_password">Password:</label><input type="password" id="reg_password" name="password" class="form-control-modal" placeholder="Minimal 6 karakter" required></div><div class="form-group"><label for="reg_confirm_password">Konfirmasi Password:</label><input type="password" id="reg_confirm_password" name="confirm_password" class="form-control-modal" required></div><div class="form-group"><input type="submit" value="Daftar" class="btn-login"></div></form><div class="modal-footer-text"><p>Sudah punya akun? <a href="#" id="switchToLoginLink">Login di sini</a></p></div></div></div>
   <div id="cartDetailModal" class="modal"><div class="modal-content"><span class="close-btn cart-detail-close-btn">×</span><div class="modal-header-text"><h2>Keranjang Belanja Anda</h2></div><div id="cartDetailContent"><p class="text-center">Keranjang Anda kosong.</p></div><div id="checkoutFormContainer" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; display: none;"><h4 style="text-align:center; margin-bottom:20px;">Detail Pengiriman & Pembayaran</h4><form id="formCheckout"><div class="form-row"><div class="form-group col-md-6"><label for="checkout_nama_pemesan">Nama Pemesan <span style="color:red;">*</span></label><input type="text" class="form-control-modal" id="checkout_nama_pemesan" name="nama_pemesan" required></div><div class="form-group col-md-6"><label for="checkout_nomor_telepon">Nomor Telepon <span style="color:red;">*</span></label><input type="tel" class="form-control-modal" id="checkout_nomor_telepon" name="nomor_telepon" required></div></div><div class="form-group"><label for="checkout_alamat_pengiriman">Alamat Pengiriman <span style="color:red;">*</span></label><textarea class="form-control-modal" id="checkout_alamat_pengiriman" name="alamat_pengiriman" rows="3" required></textarea></div><div class="form-group"><label for="checkout_catatan_pesanan">Catatan Pesanan (Opsional)</label><textarea class="form-control-modal" id="checkout_catatan_pesanan" name="catatan_pesanan" rows="2"></textarea></div><div id="checkoutMessage" class="message" style="margin-top:15px;"></div></form></div><div id="cartDetailSummary" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee;"><h5 class="text-right">Total Harga: <span id="cartDetailTotalAmount">Rp 0</span></h5><div class="text-right mt-3"><button class="btn btn-primary" id="processCheckoutBtn" disabled>Proses Pesanan</button></div></div></div></div>
@@ -886,28 +887,28 @@ $(document).ready(function() {
     if ($("#bookLink").length) { $("#bookLink").on("click", function (e) { /* ... smooth scroll ... */ }); }
 });
 </script>
-<div class="chatbot-container" id="chatbotContainer">
-    <div class="chatbot-header" id="chatbotHeader">
+<div class="chatbot-container" id="chatbot-container" style="display: none;">
+    <div class="chatbot-header">
         <span>Chat dengan Kami!</span>
-        <span class="chatbot-close-btn" id="chatbotCloseBtn">&times;</span>
+        <span class="chatbot-close-btn" id="chatbot-close-btn">×</span>
     </div>
+    
     <div class="chatbot-body" id="chatbotBody">
         <div class="chatbot-message bot-message">
             <p>Halo! Ada yang bisa saya bantu? Silakan pilih salah satu opsi di bawah ini:</p>
-            <div class="chatbot-options">
-                <button class="chatbot-option" data-question="jam_buka">Jam Buka</button>
-                <button class="chatbot-option" data-question="lokasi">Lokasi</button>
-                <button class="chatbot-option" data-question="promo">Promo</button>
-            </div>
         </div>
     </div>
+
     <div class="chatbot-footer">
-        <input type="text" id="chatbotInput" placeholder="Ketik pesan..." disabled>
-        <button id="chatbotSendBtn" disabled>Kirim</button>
+        <div class="chatbot-options">
+            <button class="chatbot-option" data-question="jam_buka">Jam Buka</button>
+            <button class="chatbot-option" data-question="lokasi">Lokasi</button>
+            <button class="chatbot-option" data-question="promo">Promo</button>
+        </div>
     </div>
 </div>
 
-<div class="chatbot-toggle-button" id="chatbotToggleButton">
+<div class="chatbot-toggle-button" id="chatbot-toggle-btn">
     <i class="fa fa-comments"></i>
 </div>
 </body>

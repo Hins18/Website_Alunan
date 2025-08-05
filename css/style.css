@@ -1056,109 +1056,258 @@ a:focus {
   color: black;
 }
 /*# sourceMappingURL=style.css.map */
+/* -- STYLING CHATBOT BARU -- */
 
-/* Chatbot Styles */
-.chatbot-container {
-    display: none;
+/* Tombol Ikon Chat yang Mengambang */
+.chatbot-toggle-button {
     position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 350px;
-    max-width: 90%;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    flex-direction: column;
-    overflow: hidden;
-    z-index: 1000;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background-color: #222831; /* Warna gelap */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px; /* Ukuran ikon sedikit lebih besar */
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 999;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+.chatbot-toggle-button:hover {
+    transform: scale(1.1);
+    background-color: #ffbe33; /* Warna kuning saat hover */
+}
+
+/* Container Jendela Chat */
+.chatbot-container {
+    position: fixed;
+    bottom: 100px;
+    right: 25px;
+    width: 350px;
+    max-width: 90vw;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+    /* display: none;  TIDAK PERLU LAGI DI SINI KARENA SUDAH DI HTML */
+}
+
+/* Header Jendela Chat */
 .chatbot-header {
-    background-color: #222831;
+    background-color: #222831; /* Warna gelap */
     color: white;
-    padding: 15px;
-    font-weight: bold;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
 }
 
 .chatbot-close-btn {
     cursor: pointer;
-    font-size: 24px;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: bold;
+    color: #aaa;
+    transition: color 0.2s ease;
 }
 
+.chatbot-close-btn:hover {
+    color: white;
+}
+
+/* Body (Isi Percakapan) */
 .chatbot-body {
-    padding: 15px;
-    height: 300px;
-    overflow-y: auto;
+    padding: 20px;
+    overflow-y: auto; /* Membuat body bisa di-scroll */
+    flex-grow: 1; /* Membuat body mengisi ruang yang tersedia */
     display: flex;
     flex-direction: column;
+    background-color: #f4f7f6;
+    height: 350px; /* Atur tinggi maksimal untuk percakapan */
+}
+
+.chatbot-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #ffffff;
 }
 
 .chatbot-message {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     padding: 10px 15px;
-    border-radius: 20px;
-    max-width: 80%;
+    border-radius: 18px;
+    max-width: 85%;
     line-height: 1.4;
 }
 
 .bot-message {
-    background-color: #f1f1f1;
+    background-color: #e9ecef; /* Abu-abu muda */
+    color: #333;
     align-self: flex-start;
     border-top-left-radius: 5px;
 }
 
 .user-message {
-    background-color: #ffbe33;
-    color: white;
+    background-color: #ffbe33; /* Kuning */
+    color: #222831; /* Teks gelap agar kontras */
     align-self: flex-end;
     border-top-right-radius: 5px;
 }
 
+/* Pilihan Tombol dalam Chat */
 .chatbot-options {
-    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap; /* Tombol akan pindah ke baris baru jika tidak muat */
+    gap: 8px; /* Jarak antar tombol */
+    justify-content: center; /* Tombol berada di tengah */
+}
+
+
+Tentu, saya mengerti. Anda ingin agar tombol pilihan pertanyaan tetap terlihat di bagian bawah jendela chat, meskipun percakapan di atasnya sudah panjang dan bisa di-scroll.
+
+Ini bisa diperbaiki dengan memisahkan bagian percakapan (yang bisa di-scroll) dari bagian footer (yang berisi tombol opsi).
+
+Kesalahan pada kode sebelumnya adalah menempatkan div untuk opsi (chatbot-options) di dalam div untuk badan chat (chatbot-body). Kita akan memindahkannya ke footer.
+
+## 🛠️ Langkah-langkah Perbaikan
+### 1. Perbarui File index.php
+Buka file index.php Anda. Cari blok HTML untuk chatbot, lalu pindahkan div dengan kelas chatbot-options ke dalam div baru yang akan kita buat, yaitu chatbot-footer.
+
+Kode Lama di index.php:
+
+HTML
+
+<div class="chatbot-body" id="chatbotBody">
+    <div class="chatbot-message bot-message">
+        <p>Halo! Ada yang bisa saya bantu? Silakan pilih salah satu opsi di bawah ini:</p>
+    </div>
+    <div class="chatbot-options">
+        <button class="chatbot-option" data-question="jam_buka">Jam Buka</button>
+        <button class="chatbot-option" data-question="lokasi">Lokasi</button>
+        <button class="chatbot-option" data-question="promo">Promo</button>
+    </div>
+</div>
+Ubah Menjadi Kode Baru Ini:
+Pastikan strukturnya persis seperti ini, dengan chatbot-footer di luar chatbot-body.
+
+HTML
+
+<div class="chatbot-container" id="chatbot-container" style="display: none;">
+    <div class="chatbot-header">
+        <span>Chat dengan Kami!</span>
+        <span class="chatbot-close-btn" id="chatbot-close-btn">×</span>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+        <div class="chatbot-message bot-message">
+            <p>Halo! Ada yang bisa saya bantu? Silakan pilih salah satu opsi di bawah ini:</p>
+        </div>
+    </div>
+    <div class="chatbot-footer">
+        <div class="chatbot-options">
+            <button class="chatbot-option" data-question="jam_buka">Jam Buka</button>
+            <button class="chatbot-option" data-question="lokasi">Lokasi</button>
+            <button class="chatbot-option" data-question="promo">Promo</button>
+        </div>
+    </div>
+</div>
+
+<div class="chatbot-toggle-button" id="chatbot-toggle-btn">
+    <i class="fa fa-comments"></i>
+</div>
+### 2. Perbarui File css/style.css
+Sekarang, kita perlu memastikan style untuk chatbot-body dan chatbot-footer sudah benar. Buka file css/style.css Anda dan ganti blok styling chatbot yang relevan dengan kode di bawah ini. Kode ini akan membuat chatbot-body bisa di-scroll dan chatbot-footer tetap di bawah.
+
+Ganti blok CSS .chatbot-body, .chatbot-footer, .chatbot-options, dan .chatbot-option dengan kode baru ini:
+
+CSS
+
+/* Body (Isi Percakapan) */
+.chatbot-body {
+    padding: 20px;
+    overflow-y: auto; /* Membuat body bisa di-scroll */
+    flex-grow: 1; /* Membuat body mengisi ruang yang tersedia */
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f7f6;
+    height: 350px; /* Atur tinggi maksimal untuk percakapan */
+}
+
+/* Footer (Area Tombol Opsi) */
+.chatbot-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #ffffff;
+}
+
+/* Pilihan Tombol dalam Chat */
+.chatbot-options {
+    display: flex;
+    flex-wrap: wrap; /* Tombol akan pindah ke baris baru jika tidak muat */
+    gap: 8px; /* Jarak antar tombol */
+    justify-content: center; /* Tombol berada di tengah */
 }
 
 .chatbot-option {
-    background-color: #ffbe33;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 15px;
+    background-color: #fff;
+    color: #222831;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 20px;
     cursor: pointer;
-    margin: 5px 5px 5px 0;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-size: 0.9em;
+    font-weight: 500;
 }
 
 .chatbot-option:hover {
-    background-color: #e69c00;
+    background-color: #ffbe33;
+    border-color: #ffbe33;
+    color: #222831;
 }
 
+
+/* Footer (Input Pesan) */
 .chatbot-footer {
-    padding: 10px;
-    border-top: 1px solid #ddd;
+    padding: 15px 20px;
+    border-top: 1px solid #e9ecef;
+    background-color: #ffffff;
     display: flex;
 }
 
 .chatbot-footer input {
     flex-grow: 1;
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px 15px;
     border-radius: 20px;
     margin-right: 10px;
+}
+
+.chatbot-footer input:disabled {
+    background-color: #f1f1f1;
+    cursor: not-allowed;
 }
 
 .chatbot-footer button {
     background-color: #222831;
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 10px 18px;
     border-radius: 20px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chatbot-footer button:hover:not(:disabled) {
+    background-color: #ffbe33;
 }
 
 .chatbot-footer button:disabled {
@@ -1166,23 +1315,7 @@ a:focus {
     cursor: not-allowed;
 }
 
-.chatbot-toggle-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #222831;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 999;
-}
+/* -- AKHIR STYLING CHATBOT BARU -- */
 
 html {
   scroll-behavior: smooth;
